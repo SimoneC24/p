@@ -45,14 +45,19 @@ public class ProductControl extends HttpServlet {
 			try {
 				ProductBean prodotto = model.doRetrieveByKey(codice);
 				request.setAttribute("prodottoDettaglio", prodotto);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			} catch (Exception e) {
+				
+				//Inserisco una pagina di errore customizzata per evitare di rendere visibile lo Stack Trace dell'errore
+		        request.setAttribute("errorMessage", "Attenzione c'è un errore.");
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/errore.jsp");
+		        dispatcher.forward(request, response);
+		    }
 			finally {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/productDetail.jsp");
 				dispatcher.forward(request, response);
 			}
-		}
+		}		
+		
 		else if (request.getParameter("action") != null && request.getParameter("action").compareTo("elimina") == 0) {
 			@SuppressWarnings("unchecked")
 			Collection<ProductBean> lista = (Collection<ProductBean>) request.getSession().getAttribute("products");
