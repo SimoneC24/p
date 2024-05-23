@@ -13,6 +13,7 @@
  	<title>Geek Factory - Vendita</title>
     <link rel="stylesheet" href="./css/account.css">
     <link rel="icon" href="./img/icon.png">
+    <script type= "text/javascript" src= "${ pageContext.request.contextPath }/script/validationForm.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -23,7 +24,7 @@
 	<div class="container" style="height: 540px">
 		<div class="title">Inserisci informazioni sul prodotto</div>
 		<div class="content">
-		<form action="Vendita" enctype="multipart/form-data" METHOD="POST">
+		<form action="Vendita" enctype="multipart/form-data" METHOD="POST" onsubmit="return validate(this)">
 			<div class="user-details">
 				<div class="input-box">
 					<span class="details">Nome prodotto</span>
